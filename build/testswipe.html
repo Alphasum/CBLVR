@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Graceful Giving Swipe View</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+  </head>
+  <body class="bg-gradient-to-r from-green-500 to-blue-500">
+    
+    <div class="container mx-auto overflow-hidden">
+      <!-- Main Content -->
+      <div class="flex-1 p-6">
+        <!-- Header -->
+        <header class="shadow mb-6">
+          <div class="container m-auto px-6 py-10">
+            <h1 class="text-3xl font-bold text-gray-800">Graceful Giving</h1>
+            <p class="text-gray-600">
+              Swipe through charitable causes and make a difference.
+            </p>
+          </div>
+        </header>
+
+        <!-- Swipe View Section -->
+        <div class="swiper-container m-20">
+          <div class="swiper-wrapper">
+            <!-- Card 1 -->
+            <div
+              class="swiper-slide bg-blue-200 rounded-lg shadow-lg overflow-hidden"
+            >
+              <img
+                src="https://via.placeholder.com/400x300"
+                alt="Charity Image"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-4">
+                <h3 class="font-bold text-gray-800">Clean Water Initiative</h3>
+                <p class="text-gray-600">
+                  Providing clean water to underdeveloped regions.
+                </p>
+                <p class="text-gray-600">Target: 500 Christ Coins</p>
+                <p class="text-gray-600">Raised: 250 Christ Coins</p>
+                <p class="text-gray-600">Location: Africa</p>
+                <a
+                  href="https://example.com"
+                  class="text-blue-500 hover:underline"
+                  >Visit Website</a
+                >
+                <div class="mt-4 flex space-x-2">
+                  <button
+                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                  >
+                    Donate
+                  </button>
+                  <button
+                    class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                  >
+                    Share
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Card 2 -->
+            <div
+              class="swiper-slide bg-blue-200 rounded-lg shadow-lg overflow-hidden"
+            >
+              <img
+                src="https://via.placeholder.com/400x300"
+                alt="Charity Image"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-4">
+                <h3 class="font-bold text-gray-800">
+                  School Supplies for Kids
+                </h3>
+                <p class="text-gray-600">
+                  Providing essential school supplies to children in need.
+                </p>
+                <p class="text-gray-600">Target: 300 Christ Coins</p>
+                <p class="text-gray-600">Raised: 150 Christ Coins</p>
+                <p class="text-gray-600">Location: India</p>
+                <a
+                  href="https://example.com"
+                  class="text-blue-500 hover:underline"
+                  >Visit Website</a
+                >
+                <div class="mt-4 flex space-x-2">
+                  <button
+                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                  >
+                    Donate
+                  </button>
+                  <button
+                    class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                  >
+                    Share
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Card 3 -->
+            <div
+              class="swiper-slide bg-blue-200 rounded-lg shadow-lg overflow-hidden"
+            >
+              <img
+                src="https://via.placeholder.com/400x300"
+                alt="Charity Image"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-4">
+                <h3 class="font-bold text-gray-800">
+                  Medical Aid for Refugees
+                </h3>
+                <p class="text-gray-600">
+                  Providing medical aid to refugees and displaced persons.
+                </p>
+                <p class="text-gray-600">Target: 700 Christ Coins</p>
+                <p class="text-gray-600">Raised: 400 Christ Coins</p>
+                <p class="text-gray-600">Location: Middle East</p>
+                <a
+                  href="https://example.com"
+                  class="text-blue-500 hover:underline"
+                  >Visit Website</a
+                >
+                <div class="mt-4 flex space-x-2">
+                  <button
+                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                  >
+                    Donate
+                  </button>
+                  <button
+                    class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                  >
+                    Share
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Add more cards as needed -->
+          </div>
+          <!-- Add Pagination -->
+          <div class="swiper-pagination"></div>
+          <!-- Add Navigation -->
+          <div class="swiper-button-next bg-white rounded p-10"></div>
+          <div class="swiper-button-prev bg-white rounded p-10"></div>
+        </div>
+      </div>
+
+      <!-- Swiper.js -->
+      <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+      <script>
+        var swiper = new Swiper(".swiper-container", {
+          slidesPerView: 1,
+          spaceBetween: 10,
+          loop: true,
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+        });
+      </script>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        .emoji-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            font-size: 5rem;
+            margin-bottom: 2rem;
+        }
+
+        .emoji {
+            position: relative;
+        }
+
+        .eye {
+            position: absolute;
+            width: 0.6em;
+            height: 0.5em;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .eye.left {
+            left: 30%;
+            top: 40%;
+        }
+
+        .eye.right {
+            right: 30%;
+            top: 40%;
+        }
+
+        .pupil {
+            position: absolute;
+            width: 0.5em;
+            height: 0.5em;
+            border-radius: 50%;
+            background: black;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen bg-gradient-to-r from-green-500 to-blue-500">
+
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <div class="emoji-container">
+            <div class="emoji text-9xl">
+                😊
+                <div class="eye left text-2xl">
+                    <div class="pupil"></div>
+                </div>
+                <div class="eye right text-2xl">
+                    <div class="pupil"></div>
+                </div>
+            </div>
+        </div>
+        <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">Sign Up</h2>
+        <form action="/sign-up" method="post" class="space-y-6">
+            <div>
+                <label for="username" class="block text-gray-700">Username</label>
+                <input type="text" id="username" name="username" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div>
+                <label for="email" class="block text-gray-700">Email</label>
+                <input type="email" id="email" name="email" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div>
+                <label for="password" class="block text-gray-700">Password</label>
+                <input type="password" id="password" name="password" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div>
+                <label for="confirm_password" class="block text-gray-700">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div class="flex items-center">
+                <input type="checkbox" id="terms" name="terms" class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                <label for="terms" class="ml-2 block text-gray-900">I agree to the <a href="/build/termsandconditions.html" class="text-blue-600 hover:underline">terms and conditions</a></label>
+            </div>
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Sign Up</button>
+        </form>
+        <div class="my-6">
+            <p>Already a user? <a href="/build/login.html" class="text-blue-500 hover:underline py-2 px-4 ">Login Here</a></p>
+
+        </div>
+
+    </div>
+    <script>
+        document.addEventListener('mousemove', function(e) {
+            const eyes = document.querySelectorAll('.eye');
+            eyes.forEach(eye => {
+                const rect = eye.getBoundingClientRect();
+                const eyeX = rect.left + rect.width / 2;
+                const eyeY = rect.top + rect.height / 2;
+                const angle = Math.atan2(e.pageX - eyeX, e.pageY - eyeY);
+                const pupil = eye.querySelector('.pupil');
+                const distance = 0.2;
+                const x = Math.sin(angle) * distance;
+                const y = Math.cos(angle) * distance;
+                pupil.style.transform = `translate(${x}em, ${y}em)`;
+            });
+        });
+    </script>
+</body>
+</html>

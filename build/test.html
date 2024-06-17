@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Infinite Zoom SVG</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    svg {
+      overflow: visible;
+      transform-style: preserve-3d;
+    }
+  </style>
+</head>
+<body class="flex justify-center items-center h-screen overflow-hidden bg-gray-200" >
+  <div class="mb-12 flex scroll-mt-40 flex-col-reverse items-center  gap-8 p-6  bg-cover  h-screen w-screen" style="background-image: url('/build/img/Default_a_photo_realistic_image_of_the_world_with_continents_o_3.jpg');">
+    <svg id="canvas" viewBox="-400 -400 800 800" xmlns="http://www.w3.org/2000/svg" class="w-screen h-screen">
+        <defs>
+          <g id="circlePattern">
+            <circle cx="0" cy="0" r="200" fill="url(#circleImage)" stroke="black" />
+            <defs>
+              <pattern id="circleImage" patternUnits="objectBoundingBox" width="1" height="1">
+                <image href="/build/img/Default_a_photo_realistic_image_of_the_world_with_continents_o_4.jpg"  class="size-auto w-full"/>                
+              </pattern>
+            </defs>
+          </g>
+          <g id="squarePattern">
+            <rect x="-200" y="-200" width="400" height="400" fill="url(#squareImage)" stroke="black" />
+            <defs>
+              <pattern id="squareImage" patternUnits="objectBoundingBox" width="1" height="1">
+                <image href="/build/img/Default_a_photo_realistic_image_of_the_world_with_continents_o_5.jpg"  class="size-auto w-full"/>
+              </pattern>
+            </defs>
+          </g>
+          <g id="trianglePattern">
+            <polygon points="0,-200 173.2,100 -173.2,100" fill="url(#triangleImage)" stroke="black" />
+            <defs>
+              <pattern id="triangleImage" patternUnits="objectBoundingBox" width="1" height="1">
+                <image href="/build/img/Default_a_photo_realistic_image_of_the_world_with_continents_o_6.jpg"  class="size-auto w-full"/>
+              </pattern>
+            </defs>
+          </g>
+        </defs>
+        <use xlink:href="#circlePattern" id="mainShape" />
+      </svg>
+  </div>
+    
+  <script>
+    const shapes = ['circlePattern', 'squarePattern', 'trianglePattern'];
+    let currentShapeIndex = 0;
+    let scale = 1;
+    const step = 0.05; // Increase step size for faster zoom speed
+
+    function changeShape() {
+      currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
+      document.getElementById('mainShape').setAttribute('xlink:href', `#${shapes[currentShapeIndex]}`);
+    }
+
+    function animateZoom() {
+      const svg = document.getElementById("canvas");
+
+      function zoom() {
+        scale += step;
+        if (scale > 5) { // Reduce the maximum scale to shorten the transition time
+          scale = 1;
+          changeShape(); // Change the shape on reset
+        }
+        svg.style.transform = `scale(${scale})`;
+        svg.style.transformOrigin = 'center center';
+        requestAnimationFrame(zoom);
+      }
+
+      zoom();
+    }
+
+    animateZoom();
+  </script>
+</body>
+</html>

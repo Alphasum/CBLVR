@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Christ Coin Community</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        .emoji-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            font-size: 5rem;
+            margin-bottom: 2rem;
+        }
+
+        .emoji {
+            position: relative;
+        }
+
+        .eye {
+            position: absolute;
+            width: 0.6em;
+            height: 0.5em;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .eye.left {
+            left: 30%;
+            top: 40%;
+        }
+
+        .eye.right {
+            right: 30%;
+            top: 40%;
+        }
+
+        .pupil {
+            position: absolute;
+            width: 0.5em;
+            height: 0.5em;
+            border-radius: 50%;
+            background: black;
+        }
+    </style>
+
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen bg-gradient-to-r from-green-500 to-blue-500">
+
+    <div class="w-full max-w-md">
+        <div class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
+            <div class="emoji-container">
+                <div class="emoji text-9xl">
+                    😊
+                    <div class="eye left text-2xl">
+                        <div class="pupil"></div>
+                    </div>
+                    <div class="eye right text-2xl">
+                        <div class="pupil"></div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Login</h2>
+            <form action="#" method="POST">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                        Username
+                    </label>
+                    <input placeholder="Enter your email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                        Password
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="***********" required>
+                    <p class="text-red-500 text-xs italic">Please choose a password.</p>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                        Sign In
+                    </button>
+                    <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="/build/app/bible.html">
+                        Forgot Password?
+                    </a>
+                </div>
+            </form>
+            <div class="my-6">
+                <p>New to our platform? <a href="/build/signup.html" class="text-blue-500 hover:underline py-2 px-4 ">Sign Up Here</a></p>
+            </div>
+        </div>
+        <p class="text-center text-gray-500 text-xs">
+            &copy;2024 Christ Coin Community. All rights reserved.
+        </p>
+    </div>
+    <script>
+        document.addEventListener('mousemove', function(e) {
+            const eyes = document.querySelectorAll('.eye');
+            eyes.forEach(eye => {
+                const rect = eye.getBoundingClientRect();
+                const eyeX = rect.left + rect.width / 2;
+                const eyeY = rect.top + rect.height / 2;
+                const angle = Math.atan2(e.pageX - eyeX, e.pageY - eyeY);
+                const pupil = eye.querySelector('.pupil');
+                const distance = 0.2;
+                const x = Math.sin(angle) * distance;
+                const y = Math.cos(angle) * distance;
+                pupil.style.transform = `translate(${x}em, ${y}em)`;
+            });
+        });
+    </script>
+</body>
+</html>

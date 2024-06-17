@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Circle</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="/js/main.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.5.2/dist/web3.min.js"></script>
+  
+  <style>
+    .container {
+      max-width: 800px;
+    }
+    .masked {
+            -webkit-text-security: disc; /* For Safari */
+            -text-security: disc; /* For others */
+        }
+        .eye-icon {
+            cursor: pointer;
+        }
+  </style>
+
+</head>
+<body class=" flex bg-gradient-to-r from-green-500 to-blue-500 lg:w-2/3 m-auto">
+
+    <!-- Sidebar -->
+    <aside class="w-auto bg-gray-800 text-white">
+        <div class="p-4">
+            <h1 class="text-2xl font-bold w-64">
+              <a href="/index.html"><img src="/build/img/Screenshot_2024-05-25_13-04-05-removebg-preview.png"
+                  alt="SanctuarySphere" class="size-8/12" /></a>
+            </h1>
+          </div>
+          <div class="py-2.5 px-4 my-12 rounded transition duration-200">
+            <div class="flex items-center">
+              <img class="w-12 h-12 rounded-full" src="/build/videos/profpic1.jpg" alt="Team Member 1" />
+              <a href="/build/app/profile.html" class="py-2.5 px-4">Samuel Mwaura</a>
+            </div>
+            <button id="connectButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-5 rounded">Connect Wallet</button>
+              <p class="text-xs my-5">Wallet ID: <br><span id="walletId" class="masked"></span> <i id="toggleWalletId" class="fas fa-eye eye-icon"></i></p>
+              <p class="text-xs my-5">BNB Balance: <br><span id="bnbBalance" class="masked"></span> <i id="toggleBalance" class="fas fa-eye eye-icon"></i></p>
+            
+  
+            
+          </div>
+          <nav class="mt-8">
+            <span class="py-2.5 px-4 text-2xl font-bold ">Features</span>
+            <a href="/build/app/bible.html"
+              class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Bible</a>
+            <a href="/build/app/socialcircle.html"
+              class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Social Circle</a>
+            <a href="/build/app/entertainment.html"
+              class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Christian Home Entertainment</a>
+            <a href="/build/app/blessedbazaar.html"
+              class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Blessed Bazaar</a>
+            <a href="/build/app/spherebids.html"
+              class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Sphere Bids and Lottery</a>
+            <a href="/build/app/gracefulgiving.html"
+              class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Graceful Giving</a>
+            <a href="/build/app/biblespaceenv.html"
+              class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Bible Space Environment</a>
+  
+          </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-6">
+
+        <!-- Header -->
+        <header class="bg-gradient-to-r from-green-200 to-blue-500 shadow mb-6 grid grid-cols-1 lg:grid-cols-2 gap-8 rounded-full">
+            <div class="container mx-auto px-6 py-4 m-auto object-center text-center">
+                <h1 class="text-3xl font-bold text-gray-800">Social Circle</h1>
+                <p class="text-gray-600">Engage with Christians from around the globe</p>
+            </div>
+            <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+            <dotlottie-player class="bg-blue-500 rounded-full" src="https://lottie.host/0eb7a285-0400-4813-88b7-005776cfa648/NLRLFUXftf.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+
+        </header>
+
+        <!-- Create Post Section -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-6">
+            <div class="p-4">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Create Post</h2>
+                <form>
+                    <textarea class="w-full p-2 border rounded-lg mb-4" rows="3" placeholder="What's on your mind?"></textarea>
+                    <div class="flex items-center space-x-4">
+                        <button type="submit" class="bg-blue-900 hover:bg-green-700 text-white px-4 py-2 rounded">Post</button>
+                        <button type="button" class="text-blue-500 hover:text-green-700">🖼️</button>
+                        <button type="button" class="text-blue-500 hover:text-green-700">📽️</button>
+                        <!-- Emoji Button -->
+                        <button type="button" class="text-blue-500 hover:text-green-700" onclick="toggleEmojiPicker()">😀</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Emoji Picker Modal -->
+        <div id="emojiPicker" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+            <div class="bg-white rounded-lg shadow-lg p-4 grid grid-cols-10 ">
+                <button class="emoji-icon" onclick="insertEmoji('😀')">😀</button>
+                <button class="emoji-icon" onclick="insertEmoji('😃')">😃</button>
+                <button class="emoji-icon" onclick="insertEmoji('😄')">😄</button>
+                <button class="emoji-icon" onclick="insertEmoji('😁')">😁</button>
+                <button class="emoji-icon" onclick="insertEmoji('😆')">😆</button>
+                <button class="emoji-icon" onclick="insertEmoji('😅')">😅</button>
+                <button class="emoji-icon" onclick="insertEmoji('😂')">😂</button>
+                <button class="emoji-icon" onclick="insertEmoji('🤣')">🤣</button>
+                <button class="emoji-icon" onclick="insertEmoji('😊')">😊</button>
+                <button class="emoji-icon" onclick="insertEmoji('😇')">😇</button>
+                <button class="emoji-icon" onclick="insertEmoji('🙂')">🙂</button>
+                <button class="emoji-icon" onclick="insertEmoji('🙃')">🙃</button>
+                <button class="emoji-icon" onclick="insertEmoji('😉')">😉</button>
+                <button class="emoji-icon" onclick="insertEmoji('😌')">😌</button>
+                <button class="emoji-icon" onclick="insertEmoji('😍')">😍</button>
+                <button class="emoji-icon" onclick="insertEmoji('🥰')">🥰</button>
+                <button class="emoji-icon" onclick="insertEmoji('😘')">😘</button>
+                <button class="emoji-icon" onclick="insertEmoji('😗')">😗</button>
+                <button class="emoji-icon" onclick="insertEmoji('😙')">😙</button>
+                <button class="emoji-icon" onclick="insertEmoji('😚')">😚</button>
+                <button class="emoji-icon" onclick="insertEmoji('😋')">😋</button>
+                <button class="emoji-icon" onclick="insertEmoji('😛')">😛</button>
+                <button class="emoji-icon" onclick="insertEmoji('😜')">😜</button>
+                <button class="emoji-icon" onclick="insertEmoji('🤪')">🤪</button>
+                <button class="emoji-icon" onclick="insertEmoji('😝')">😝</button>
+                <button class="emoji-icon" onclick="insertEmoji('🤑')">🤑</button>
+                <button class="emoji-icon" onclick="insertEmoji('🤗')">🤗</button>
+                <button class="emoji-icon" onclick="insertEmoji('🤭')">🤭</button>
+                <button class="emoji-icon" onclick="insertEmoji('🤫')">🤫</button>
+                <button class="emoji-icon" onclick="insertEmoji('🤔')">🤔</button>
+                <button class="emoji-icon" onclick="insertEmoji('🤐')">🤐</button>
+                <button class="emoji-icon" onclick="insertEmoji('🤨')">🤨</button>
+                <button class="emoji-icon" onclick="insertEmoji('😐')">😐</button>
+                <button class="emoji-icon" onclick="insertEmoji('😑')">😑</button>
+                <button class="emoji-icon" onclick="insertEmoji('😶')">😶</button>
+                <button class="emoji-icon" onclick="insertEmoji('😏')">😏</button>
+                <button class="emoji-icon" onclick="insertEmoji('😒')">😒</button>
+                <button class="emoji-icon" onclick="insertEmoji('🙄')">🙄</button>
+                <button class="emoji-icon" onclick="insertEmoji('😬')">😬</button>
+                <button class="emoji-icon" onclick="insertEmoji('😮')">😮</button>
+                <button class="emoji-icon" onclick="insertEmoji('😯')">😯</button>
+                <button class="emoji-icon" onclick="insertEmoji('😧')">😧</button>
+                <button class="emoji-icon" onclick="insertEmoji('😲')">😲</button>
+                <button class="emoji-icon" onclick="insertEmoji('😳')">😳</button>
+                <button class="emoji-icon" onclick="insertEmoji('🥺')">🥺</button>
+                <button class="emoji-icon" onclick="insertEmoji('😦')">😦</button>
+                <button class="emoji-icon" onclick="insertEmoji('😧')">😧</button>
+                <button class="emoji-icon" onclick="insertEmoji('😨')">😨</button>
+                <button class="emoji-icon" onclick="insertEmoji('😰')">😰</button>
+                <button class="emoji-icon" onclick="insertEmoji('😥')">😥</button>
+                <button class="emoji-icon" onclick="insertEmoji('😢')">😢</button>
+                <button class="emoji-icon" onclick="insertEmoji('😭')">😭</button>
+                <button class="emoji-icon" onclick="insertEmoji('😱')">😱</button>
+                <button class="emoji-icon" onclick="insertEmoji('😖')">😖</button>
+                <button class="emoji-icon" onclick="insertEmoji('😣')">😣</button>
+                <button class="emoji-icon" onclick="insertEmoji('😞')">😞</button>
+                <button class="emoji-icon" onclick="insertEmoji('😓')">😓</button>
+                <button class="emoji-icon" onclick="insertEmoji('😩')">😩</button>
+                <button class="emoji-icon" onclick="insertEmoji('😫')">😫</button>
+                <button class="emoji-icon" onclick="insertEmoji('🥱')">🥱</button>
+                <button class="emoji-icon" onclick="insertEmoji('😤')">😤</button>
+                <button class="emoji-icon" onclick="insertEmoji('😡')">😡</button>
+                <button class="emoji-icon" onclick="insertEmoji('😠')">😠</button>
+                <button class="emoji-icon" onclick="insertEmoji('🤬')">🤬</button>
+                <button class="emoji-icon" onclick="insertEmoji('😈')">😈</button>
+                <button class="emoji-icon" onclick="insertEmoji('👿')">👿</button>
+                <button class="emoji-icon" onclick="insertEmoji('💀')">💀</button>
+                <button class="emoji-icon" onclick="insertEmoji('☠')">☠</button>
+                <button class="emoji-icon" onclick="insertEmoji('💩')">💩</button>
+                <button class="emoji-icon" onclick="insertEmoji('🤡')">🤡</button>
+            </div>
+        </div>
+        
+        <script>
+            // Function to toggle the visibility of the emoji picker
+            function toggleEmojiPicker() {
+                const emojiPicker = document.getElementById('emojiPicker');
+                emojiPicker.classList.toggle('hidden');
+            }
+        
+            // Function to insert the selected emoji into the textarea
+            function insertEmoji(emoji) {
+                const textarea = document.querySelector('textarea');
+                textarea.value += emoji;
+            }
+            
+            const initApp = () => {
+                const emojiPicker = document.getElementById('emojiPicker');
+                const textarea = document.querySelector('textarea');
+
+            const toggleMenu = () => {
+                emojiPicker.classList.toggle('hidden');
+                textarea.value += emoji;
+            }
+
+            emojiPicker.addEventListener('click', toggleMenu)
+        }
+
+        document.addEventListener('DOMContentLoaded', initApp)
+        </script>
+        
+        
+
+        <!-- Posts Section -->
+        <div class="flex justify-center space-x-4 mb-8 ">
+            <!-- Trending Filter -->
+            <button class="px-4 py-2 bg-blue-900 text-white font-semibold rounded  hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Trending
+            </button>
+            <!-- Latest Filter -->
+            <button class="px-4 py-2 bg-blue-900 text-white font-semibold rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Latest
+            </button>
+            <!-- New Filter -->
+            <button class="px-4 py-2 bg-blue-900 text-white font-semibold rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                New
+            </button>
+        </div>
+
+        <div class="space-y-6">
+            
+            <!-- Image Post -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-4">
+                    <div class="flex items-center space-x-4">
+                        <img class="w-10 h-10 rounded-full" src="/build/videos/profpic2.jpg" alt="User Avatar">
+                        <div>
+                            <h2 class="font-bold text-gray-800">John Doe</h2>
+                            <p class="text-sm text-gray-600">2 hours ago</p>
+                        </div>
+                    </div>
+                </div>
+                <img class="w-auto m-auto h-auto" src="/build/img/chrystal.jpg" alt="Post Image">
+                <div class="p-4">
+                    <p class="text-gray-700">Beautiful digital chrystal! Do you like it?</p>
+                    <div class="mt-4">
+                        <button class="text-blue-500 hover:text-green-700">Like</button>
+                        <button class="text-blue-500 hover:text-green-700 ml-4">Comment</button>
+                        <button class="text-blue-500 hover:text-green-700 ml-4">Share</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Post -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-4">
+                    <div class="flex items-center space-x-4">
+                        <img class="w-10 h-10 rounded-full" src="/build/videos/profpic4.jpg" alt="User Avatar">
+                        <div>
+                            <h2 class="font-bold text-gray-800">Jane Smith</h2>
+                            <p class="text-sm text-gray-600">4 hours ago</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full h-64 bg-gray-200">
+                    <video class="w-full h-full" controls>
+                        <source src="/build/videos/testimonies.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="p-4">
+                    <p class="text-gray-700">Check out this inspiring testimony!</p>
+                    <div class="mt-4">
+                        <button class="text-blue-500 hover:text-green-700">Like</button>
+                        <button class="text-blue-500 hover:text-green-700 ml-4">Comment</button>
+                        <button class="text-blue-500 hover:text-green-700 ml-4">Share</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text Post -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-4">
+                    <div class="flex items-center space-x-4">
+                        <img class="w-10 h-10 rounded-full" src="/build/videos/profpic1.jpg" alt="User Avatar">
+                        <div>
+                            <h2 class="font-bold text-gray-800">Mary Johnson</h2>
+                            <p class="text-sm text-gray-600">6 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-700">Feeling blessed today! God is good all the time.</p>
+                        <div class="mt-4">
+                            <button class="text-blue-500 hover:text-green-700">Like</button>
+                            <button class="text-blue-500 hover:text-green-700 ml-4">Comment</button>
+                            <button class="text-blue-500 hover:text-green-700 ml-4">Share</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Article Post -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-4">
+                    <div class="flex items-center space-x-4">
+                        <img class="w-10 h-10 rounded-full" src="/build/videos/profpic3.jpg" alt="User Avatar">
+                        <div>
+                            <h2 class="font-bold text-gray-800">Chris Evans</h2>
+                            <p class="text-sm text-gray-600">8 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h2 class="text-2xl font-bold text-gray-800">5 Ways to Strengthen Your Faith</h2>
+                        <p class="text-gray-700 mt-2">Read this insightful article on how to deepen your relationship with God.</p>
+                        <a href="https://www.lettinghislightshine.com/5-simple-ways-to-strengthen-your-faith/" class="text-blue-500 hover:text-green-700 mt-4 inline-block">Read More</a>
+                        <div class="mt-4">
+                            <button class="text-blue-500 hover:text-green-700">Like</button>
+                            <button class="text-blue-500 hover:text-green-700 ml-4">Comment</button>
+                            <button class="text-blue-500 hover:text-green-700 ml-4">Share</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script >
+        document.getElementById('connectButton').addEventListener('click', async () => {
+    if (typeof window.ethereum !== 'undefined') {
+        try {
+            // Request account access
+            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+            const account = accounts[0];
+    
+            // Display wallet ID
+            document.getElementById('walletId').innerText = account;
+    
+            // Create web3 instance
+            const web3 = new Web3(window.ethereum);
+    
+            // Fetch BNB balance
+            const balanceWei = await web3.eth.getBalance(account);
+            const balanceBNB = web3.utils.fromWei(balanceWei, 'ether');
+    
+            // Display BNB balance
+            document.getElementById('bnbBalance').innerText = balanceBNB;
+        } catch (error) {
+            console.error(error);
+        }
+    } else {
+        alert('MetaMask is not installed. Please install MetaMask and try again.');
+    }
+    });
+    
+    function toggleVisibility(elementId, iconId) {
+    const element = document.getElementById(elementId);
+    const icon = document.getElementById(iconId);
+    if (element.classList.contains('masked')) {
+        element.classList.remove('masked');
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        element.classList.add('masked');
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+    }
+    
+    document.getElementById('toggleWalletId').addEventListener('click', () => {
+    toggleVisibility('walletId', 'toggleWalletId');
+    });
+    
+    document.getElementById('toggleBalance').addEventListener('click', () => {
+    toggleVisibility('bnbBalance', 'toggleBalance');
+    });
+    
+    </script>
+</body>
+</html>
